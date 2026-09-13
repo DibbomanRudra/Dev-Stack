@@ -96,7 +96,7 @@ export const Navbar: React.FC = () => {
           </nav>
 
           <div className="flex items-center gap-3 select-none">
-            <span
+            <button
               id="signin-text"
               className="
                 text-xs sm:text-sm
@@ -106,9 +106,9 @@ export const Navbar: React.FC = () => {
               "
             >
               Sign In
-            </span>
+            </button>
 
-            <span
+            <button
               id="signup-pill"
               className="
                 bg-[#ec4899]
@@ -123,7 +123,7 @@ export const Navbar: React.FC = () => {
               "
             >
               Sign Up
-            </span>
+            </button>
           </div>
         </div>
 
