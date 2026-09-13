@@ -82,7 +82,8 @@ export const TechCard: React.FC<TechCardProps> = ({
           </span>
 
           {/* Rating (always shown with 1 decimal place, e.g. 4.9) */}
-          <span className="text-slate-800 text-xs font-bold flex items-center gap-1">
+          <span
+           className="text-slate-800 text-xs font-bold flex items-center gap-1">
             <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
             <span>{technology.rating.toFixed(1)}</span>
           </span>
