@@ -4,9 +4,9 @@ import { Technology } from '../types';
 
 // One card that shows a single technology (React, Docker, etc.)
 interface TechCardProps {
-  technology: Technology; // the data to display on this card
-  isAdded: boolean; // true if this technology is already in the user's stack
-  onAddToStack: (tech: Technology) => void; // called when the "Add to Stack" button is clicked
+  technology: Technology; 
+  isAdded: boolean; 
+  onAddToStack: (tech: Technology) => void;
 }
 
 export const TechCard: React.FC<TechCardProps> = ({
@@ -14,8 +14,7 @@ export const TechCard: React.FC<TechCardProps> = ({
   isAdded,
   onAddToStack,
 }) => {
-  // If the icon image URL fails to load, we show the first 2 letters of the
-  // name instead (see the `imageError ? ... : ...` check below).
+
   const [imageError, setImageError] = useState(false);
 
   return (
