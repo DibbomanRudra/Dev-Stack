@@ -24,7 +24,7 @@ export const StackSidebar: React.FC<StackSidebarProps> = ({
   onRemoveAll,
 }) => {
 
-  // মোট কয়টি technology selected আছে
+  // মোট কয়টি technology selected আছে
   const selectedCount = stack.length;
 
 
@@ -171,7 +171,7 @@ export const StackSidebar: React.FC<StackSidebarProps> = ({
                     "
                   >
 
-                    {/* Technology Icon */}
+                    {/* Technology Icon (with a text-initials fallback if the image fails to load) */}
 
                     <div
                       className="
@@ -180,6 +180,8 @@ export const StackSidebar: React.FC<StackSidebarProps> = ({
                         items-center
                         justify-center
                         shrink-0
+                        rounded-lg
+                        bg-slate-50
                       "
                     >
 
@@ -193,12 +195,31 @@ export const StackSidebar: React.FC<StackSidebarProps> = ({
                         loading="lazy"
                         referrerPolicy="no-referrer"
 
-                        // Image load না হলে image hide হবে
+                        // Image load না হলে image hide হয়ে fallback দেখানো হবে
                         onError={(e) => {
                           const target = e.currentTarget;
                           target.style.display = 'none';
+                          const fallback = target.nextElementSibling as HTMLElement | null;
+                          if (fallback) fallback.style.display = 'flex';
                         }}
                       />
+
+                      {/* Fallback shown only if the icon image above fails to load */}
+                      <span
+                        className="
+                          hidden
+                          w-8 h-8
+                          rounded-md
+                          bg-slate-900
+                          text-white
+                          text-[10px]
+                          font-bold
+                          items-center
+                          justify-center
+                        "
+                      >
+                        {item.name.slice(0, 2).toUpperCase()}
+                      </span>
 
                     </div>
 
