@@ -23,7 +23,7 @@ export default function App() {
 
   // --------------------------------------------------
   // Technologies
-  // JSON file থেকে technologies এখানে রাখা হবে
+  // Technologies from the JSON file will be stored here
   // --------------------------------------------------
 
   const [technologies, setTechnologies] = useState<Technology[]>([]);
@@ -31,7 +31,7 @@ export default function App() {
 
   // --------------------------------------------------
   // Loading State
-  // Technology data load হওয়ার সময় এটি true থাকবে
+  // True while technology data is loading
   // --------------------------------------------------
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -39,7 +39,7 @@ export default function App() {
 
   // --------------------------------------------------
   // Error State
-  // Data load করতে সমস্যা হলে error এখানে থাকবে
+  // Stores error message if data loading fails
   // --------------------------------------------------
 
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -47,8 +47,8 @@ export default function App() {
 
   // --------------------------------------------------
   // User Stack
-  // User যেসব technology select করবে
-  // সেগুলো এখানে রাখা হবে
+  // selected technologies will be saved here 
+  // 
   // --------------------------------------------------
 
   const [stack, setStack] = useState<StackItem[]>([]);
@@ -83,7 +83,7 @@ export default function App() {
 
     let isMounted = true;
 
-    // Data load শুরু
+    // Data load start
     setIsLoading(true);
 
 
@@ -105,7 +105,7 @@ export default function App() {
       })
 
 
-      // JSON data পাওয়া গেলে
+      // Handle JSON data 
       .then((data: Technology[]) => {
 
         if (isMounted) {
@@ -119,7 +119,7 @@ export default function App() {
       })
 
 
-      // কোনো error হলে
+      // on error 
       .catch((err) => {
 
         console.error(
@@ -141,7 +141,7 @@ export default function App() {
       });
 
 
-    // Component unmount হলে
+    // Cleanup on unmount 
     return () => {
 
       isMounted = false;
@@ -159,13 +159,13 @@ export default function App() {
   const handleAddToStack = (tech: Technology) => {
 
 
-    // Technology আগে থেকেই আছে কিনা check
+    // Technology check
     const alreadyExists = stack.some(
       (item) => item.id === tech.id
     );
 
 
-    // যদি আগে থেকেই থাকে
+    
     if (alreadyExists) {
 
       toast.warning(
@@ -180,7 +180,7 @@ export default function App() {
     }
 
 
-    // নতুন Stack Item তৈরি
+    //  Stack Item 
     const newItem: StackItem = {
 
       ...tech,
@@ -190,7 +190,7 @@ export default function App() {
     };
 
 
-    // Stack এর মধ্যে নতুন item যোগ
+    // Stack  item add
     setStack((prev) => [
       ...prev,
       newItem,
@@ -213,14 +213,14 @@ export default function App() {
   const handleRemoveItem = (id: string) => {
 
 
-    // যে technology remove করা হচ্ছে
-    // সেটি খুঁজে বের করা
+    //  technology remove stack
+    
     const removedTech = stack.find(
       (item) => item.id === id
     );
 
 
-    // Technology remove করা
+    // Technology remove 
     setStack((prev) =>
       prev.filter(
         (item) => item.id !== id
@@ -228,7 +228,7 @@ export default function App() {
     );
 
 
-    // Remove হওয়ার notification
+    // Remove notification
     if (removedTech) {
 
       toast.info(
@@ -248,13 +248,13 @@ export default function App() {
   const handleRemoveAll = () => {
 
 
-    // Stack empty হলে কিছু করার দরকার নেই
+    
     if (stack.length === 0) {
       return;
     }
 
 
-    // সব technology remove
+    // technology remove
     setStack([]);
 
 
@@ -511,7 +511,7 @@ export default function App() {
                   {technologies.map((tech) => {
 
 
-                    // Technology already selected কিনা
+                    // Technology already selected 
                     const isAdded = stack.some(
                       (item) => item.id === tech.id
                     );
